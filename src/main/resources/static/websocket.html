@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>聊天窗口</title>
+</head>
+<body>
+<input id="myname">
+<button>连接</button>
+<script>
+    var websocket;
+
+    function conn() {
+        //创建websocket对象
+        websocket = new WebSocket("ws://localhost:80/ws/" + myname.value());
+        //连接发生错误的回调方法
+        websocket.onerror = function (event) {
+            console.info(event);
+            alert(event.message);
+
+        };
+        //连接成功建立的回调方法
+        websocket.onopen = function (event) {
+            console.info(event);
+            alert("连接成功！")
+
+        }
+        //接收到消息的回调方法
+        websocket.onmessage = function (event) {
+            console.info(event);
+            alert("接收成功！")
+        }
+
+        //连接关闭的回调方法
+        websocket.onclose = function (event) {
+            console.info(event);
+            alert("关闭成功！")
+
+        }
+    }
+
+
+    //关闭连接
+    function closeWebSocket() {
+        websocket.close();
+    }
+
+    //发送消息
+    function send(msg) {
+        websocket.send(msg);
+    }
+
+</script>
+</body>
+</html>
