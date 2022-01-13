@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>衡阳房产交易服务网-衡阳房产_衡阳房地产_房地产信息网</title>
+    <meta name="keywords" content="衡阳房地产,衡阳房产,衡阳房产网,衡阳房价,衡阳二手房,衡阳房地产门户">
+    <meta name="description"
+          content="衡阳房地产信是衡阳人气最旺、最有价值的房地产网络媒体，提供最全面最及时的房地产资讯，楼盘信息、出租出售信息、预售信息、房价信息、业主论坛等，是业内外网友公认的最受欢迎的房地产网络平台">
+    <link rel="stylesheet" type="text/css" href="images/global.css">
+    <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui/css/layui.css"/>
+    <script src="https://www.layuicdn.com/layui/layui.js"></script>
+    <script type="text/javascript" src="https://lib.baomitu.com/vue/2.6.12/vue.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js"></script>
+</head>
+<body>
+<div class="bodymain">
+    <div class="layui-header head_box">
+        <div class="layui-container head_box_in">
+            <div class="layui-row">
+                <div class="layui-col-md3">
+                    欢迎您登录衡阳房产交易服务网！<!--<a href="#">【登录】</a><a href="#">【注册】</a>-->
+                </div>
+                <div class="layui-col-md9" style="text-align:right"> <!----> <span class="head_menu"> <a href="/">首页</a><font>|</font><a
+                        href="/bbs/">公示公告</a><font>|</font><a href="/realestate/">商品房中心</a><font>|</font><a
+                        href="/news/">行业资讯</a><font>|</font><a
+                        href="http://59.51.45.56:8088/jyyt/app/framework/login/index;JSESSIONID=9cadf813-76e0-4af9-9484-3261b8db76c6"
+                        target="_blank">合同备案</a> </span> <!---->
+                </div>
+            </div>
+        </div>
+    </div> <!---->
+    <div class="layui-main main-nav">
+        <div class="logo">
+            <img src="images/bg2.jpg">
+        </div>
+        <div class="imgslogo">
+        </div>
+        <div style="display:block; clear:both"></div>
+        <div class="nav">
+            <ul class="nav-box clear">
+                <li id="top0" class="nav-item current"><a href="/" class="nav-item-primary">房产首页</a></li>
+                <li class="nav-item"><a class="nav-item-primary" href="/bbs/">公示公告</a></li>
+                <li class="nav-item"><a class="nav-item-primary" href="/realestate/">商品房中心</a></li>
+                <li class="nav-item"><a class="nav-item-primary" href="http://59.51.45.154:8000/" target="_blank"
+                                        title="物业行业信用评价系统">物业行业信用评价</a></li>
+                <li class="nav-item"><a class="nav-item-primary" href="http://59.51.45.54:8000/GZFW/" target="_blank"
+                                        title="物业维修基金">物业维修基金</a></li>
+                <li class="nav-item"><a class="nav-item-primary" href="/news/">行业资讯</a></li>
+                <li class="nav-item"><a class="nav-item-primary" href="/gov/" target="_blank">备案查询</a></li>
+                <li class="nav-item"><a class="nav-item-primary" href="http://59.51.45.56:8088/jyyt/" target="_blank">网上服务大厅</a>
+                </li>
+            </ul>
+        </div>
+        <div style="height:10px"></div>
+    </div>
+    <div class="layui-main">
+        <div style="clear:both">
+        </div>
+        <div style="height:10px"></div>
+    </div>
+    <div class="layui-main">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-xs3">
+                <div class="layui-carousel" id="test1" lay-anim="" lay-indicator="inside" lay-arrow="always"
+                     style="width: 100%; height: 530px;">
+                    <div carousel-item="">
+                        <div th:each="a : ${alist}">
+                            <a th:if='${a.type.equals("1")}' th:href="'http://'+${a.url}" target="_blank">
+                                <img th:src="${a.pic}" height="100%" width="100%">
+                            </a>
+                            <a th:if='${a.type.equals("2")}' th:href="'toAdve?id='+${a.id}" target="_blank">
+                                <img th:src="${a.pic}" height="100%" width="100%">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="layui-carousel-ind">
+                        <ul>
+                            <li class=""></li>
+                            <li class=""></li>
+                            <li class=""></li>
+                            <li class="layui-this"></li>
+                            <li class=""></li>
+                        </ul>
+                    </div>
+                    <button class="layui-icon layui-carousel-arrow" lay-type="sub"></button>
+                    <button class="layui-icon layui-carousel-arrow" lay-type="add"></button>
+                </div>
+                <script>
+                    //建造实例
+                    layui.carousel.render({
+                        elem: '#test1'
+                        , width: '100%' //设置容器宽度
+                        , height: '530px'
+                        , arrow: 'always' //始终显示箭头
+                        //,anim: 'updown' //切换动画方式
+                    });
+                </script>
+            </div>
+            <div class="layui-col-xs5">
+                <div class="index_news index_one_mid">
+                    <div class="head"><i></i><a href="/news/1.html" target="_blank">更多&gt;</a>行业资讯
+                    </div>
+                    <div class="list">
+                        <ul>
+                            <li><i></i><span>02-04</span><a href="news_show.html" title="衡阳市返乡人员自主申报健康系统已经开通"
+                                                            target="_blank">衡阳市返乡人员自主申报健康系统已经开通</a></li>
+                            <li><i></i><span>06-26</span><a href="news_show.html" title="2021年6月26日国际禁毒日"
+                                                            target="_blank">2021年6月26日国际禁毒日</a></li>
+                            <li><i></i><span>06-04</span><a href="news_show.html"
+                                                            title="衡阳市人民政府办公室关于印发《衡阳市城区商品房预售资金监管办法》的通知" target="_blank">衡阳市人民政府办公室关于印发《衡阳市城区商品房预售资金监管办法》的通知</a>
+                            </li>
+                            <li><i></i><span>04-15</span><a href="news_show.html" title="全民国家安全教育日宣传" target="_blank">全民国家安全教育日宣传</a>
+                            </li>
+                            <li><i></i><span>04-12</span><a href="news_show.html" title="新冠病毒疫苗接种科普知识宣传"
+                                                            target="_blank">新冠病毒疫苗接种科普知识宣传</a></li>
+                            <hr>
+                            <li><i></i><span>02-05</span><a href="news_show.html" title="新冠肺炎疫情防护知识宣传" target="_blank">新冠肺炎疫情防护知识宣传</a>
+                            </li>
+                            <li><i></i><span>12-04</span><a href="news_show.html" title="2020年“12.4”国家宪法日活动知识宣传"
+                                                            target="_blank">2020年“12.4”国家宪法日活动知识宣传</a></li>
+                            <li><i></i><span>10-06</span><a href="news_show.html" title="衡阳市2020网上房地产交易展示会正式上线"
+                                                            target="_blank">衡阳市2020网上房地产交易展示会正式上线</a></li>
+                            <li><i></i><span>09-17</span><a href="news_show.html" title="9月30日常宁房交会40家房企携“房”来袭"
+                                                            target="_blank">9月30日常宁房交会40家房企携“房”来袭</a></li>
+                            <li><i></i><span>09-14</span><a href="news_show.html" title="2020年国家网络安全宣传周启动"
+                                                            target="_blank">2020年国家网络安全宣传周启动</a></li>
+                            <hr>
+                            <li><i></i><span>09-13</span><a href="news_show.html" title="2020年常宁第二届房交会参展楼盘大合集"
+                                                            target="_blank">2020年常宁第二届房交会参展楼盘大合集</a></li>
+                            <li><i></i><span>08-12</span><a href="news_show.html" title="两部门印发实施方案 加强城镇生活污水处理设施补短板"
+                                                            target="_blank">两部门印发实施方案 加强城镇生活污水处理设施补短板</a></li>
+                            <li><i></i><span>07-14</span><a href="news_show.html" title="破除壁垒，整合资源，衡阳市政务大数据发展初见成效"
+                                                            target="_blank">破除壁垒，整合资源，衡阳市政务大数据发展初见成效</a></li>
+                            <li><i></i><span>07-06</span><a href="news_show.html" title="衡阳弘阳广场爱心助考，为高考学子保驾护航"
+                                                            target="_blank">衡阳弘阳广场爱心助考，为高考学子保驾护航</a></li>
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs4">
+                <div class="index_news">
+                    <div class="head"><i></i><a href="/bbs/" target="_blank">更多&gt;</a>公告通知
+                    </div>
+                    <div class="list index_bbs">
+                        <ul>
+                            <li th:each="bbs : ${blist}">
+                                <i></i>
+                                <a th:href="'bbsShow?id='+${bbs.id}" th:title="${bbs.title}" th:text="${bbs.title}"
+                                   target="_blank"></a>
+                            </li>
+
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-main">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-xs2">
+                <div class="btnindex"><a href="/realestate/" target="_blank"> <img src="images/btn/1.jpg"> </a>
+                </div>
+            </div>
+            <div class="layui-col-xs2">
+                <div class="btnindex"><a href="/realestate/" target="_blank"> <img src="images/btn/2.jpg"> </a>
+                </div>
+            </div>
+            <div class="layui-col-xs2">
+                <div class="btnindex"><a href="http://59.51.45.56:8088/jyyt/app/framework/login" target="_blank"> <img
+                        src="images/btn/3.jpg"> </a>
+                </div>
+            </div>
+            <div class="layui-col-xs2">
+                <div class="btnindex"><a href="http://www.hyfdcw.com/gov/" target="_blank"> <img src="images/btn/4.jpg">
+                </a>
+                </div>
+            </div>
+            <div class="layui-col-xs2">
+                <div class="btnindex"><a href="#" target="_blank"> <img src="images/btn/5.jpg"> </a>
+                </div>
+            </div>
+            <div class="layui-col-xs2">
+                <div class="btnindex"><a href="#" target="_blank"> <img src="images/btn/6.jpg"> </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-main">
+        <div style="clear:both">
+        </div>
+        <div style="height:10px"></div>
+    </div> <!-- 月销售排行榜-周交易数据 -->
+    <div class="layui-main">
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-xs3">
+                <div class="index_data top10">
+                    <div class="head">
+                        本月成交排行
+                    </div>
+                    <ul id="dealPaiHang-container">
+                        <li><i>1</i><span>蒸湘区</span> <a title="金域豪廷" href="/realestate/project/930.html#tab=presell"
+                                                        target="_blank">金域豪廷</a></li>
+                        <li><i>2</i><span>蒸湘区</span> <a title="阳光金城" href="/realestate/project/-78.html#tab=presell"
+                                                        target="_blank">阳光金城</a></li>
+                        <li><i>3</i><span>蒸湘区</span> <a title="金钟环球中心（金钟府）"
+                                                        href="/realestate/project/1070.html#tab=presell"
+                                                        target="_blank">金钟环球中心（金钟府</a></li>
+                        <li><i>4</i><span>珠晖区</span> <a title="中建·和城壹品" href="/realestate/project/232.html#tab=presell"
+                                                        target="_blank">中建·和城壹品</a></li>
+                        <li><i>5</i><span>珠晖区</span> <a title="珠晖酃湖万达广场"
+                                                        href="/realestate/project/1350.html#tab=presell"
+                                                        target="_blank">珠晖酃湖万达广场</a></li>
+                        <li><i>6</i><span>蒸湘区</span> <a title="银泰·红城" href="/realestate/project/350.html#tab=presell"
+                                                        target="_blank">银泰·红城</a></li>
+                        <li><i>7</i><span>珠晖区</span> <a title="衡州教育新城" href="/realestate/project/-139.html#tab=presell"
+                                                        target="_blank">衡州教育新城</a></li>
+                        <li><i>8</i><span>雁峰区</span> <a title="天嘉·翰廷" href="/realestate/project/1090.html#tab=presell"
+                                                        target="_blank">天嘉·翰廷</a></li>
+                        <li><i>9</i><span>雁峰区</span> <a title="金河湾·尚品" href="/realestate/project/530.html#tab=presell"
+                                                        target="_blank">金河湾·尚品</a></li>
+                        <li><i>10</i><span>雁峰区</span> <a title="水岸豪庭" href="/realestate/project/-126.html#tab=presell"
+                                                         target="_blank">水岸豪庭</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="layui-col-md9 layui-col-xs9">
+                <div class="index_data">
+                    <div class="head">
+                        本周全市交易数据
+                    </div>
+                    <div class="list" style="margin: 2px;">
+                        <div class="tablebox" style="position: relative; overflow: hidden; height: 320px;">
+                            <table class="tableid_" style="position: absolute; top: 0px; left: 0px; z-index: 9;">
+                                <thead>
+                                <tr>
+                                    <th style="text-align: center; width: 354px;">楼盘名称</th>
+                                    <th style="text-align: center; width: 177px;">城区</th>
+                                    <th style="text-align: center; width: 176px;">用途</th>
+                                    <th style="width: 176px;">交易套数</th>
+                                </tr>
+                                </thead>
+                            </table>
+                            <table id="week-table" cellpadding="0" cellspacing="0"
+                                   style="position: absolute; top: 0px; left: 0px; z-index: 1; margin-top: -604px;">
+                                <thead>
+                                <tr>
+                                    <th style="text-align: center;width:40%;">楼盘名称</th>
+                                    <th style="text-align: center;width:20%">城区</th>
+                                    <th style="text-align: center;width:20%">用途</th>
+                                    <th style="width:20%">交易套数</th>
+                                </tr>
+                                </thead>
+                                <tbody id="weekList-container">
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/-115.html');">
+                                    <td title="三和璟园">三和璟园</td>
+                                    <td style="text-align: center;">珠晖区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/232.html');">
+                                    <td title="中建·和城壹品">中建·和城壹品</td>
+                                    <td style="text-align: center;">珠晖区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">2</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/750.html');">
+                                    <td title="国贸中心都市综合体">国贸中心都市综合体</td>
+                                    <td style="text-align: center;">蒸湘区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/1090.html');">
+                                    <td title="天嘉·翰廷">天嘉·翰廷</td>
+                                    <td style="text-align: center;">雁峰区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/-126.html');">
+                                    <td title="水岸豪庭">水岸豪庭</td>
+                                    <td style="text-align: center;">雁峰区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/1350.html');">
+                                    <td title="珠晖酃湖万达广场">珠晖酃湖万达广场</td>
+                                    <td style="text-align: center;">珠晖区</td>
+                                    <td style="text-align: center;">商业服务</td>
+                                    <td style="text-align: center;">2</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/1171.html');">
+                                    <td title="生态天宸">生态天宸</td>
+                                    <td style="text-align: center;">蒸湘区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/-139.html');">
+                                    <td title="衡州教育新城">衡州教育新城</td>
+                                    <td style="text-align: center;">珠晖区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/930.html');">
+                                    <td title="金域豪廷">金域豪廷</td>
+                                    <td style="text-align: center;">蒸湘区</td>
+                                    <td style="text-align: center;">车库</td>
+                                    <td style="text-align: center;">5</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/610.html');">
+                                    <td title="金河湾">金河湾</td>
+                                    <td style="text-align: center;">蒸湘区</td>
+                                    <td style="text-align: center;">商业服务</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/530.html');">
+                                    <td title="金河湾·尚品">金河湾·尚品</td>
+                                    <td style="text-align: center;">雁峰区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/1070.html');">
+                                    <td title="金钟环球中心（金钟府）">金钟环球中心（金钟府）</td>
+                                    <td style="text-align: center;">蒸湘区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">2</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/350.html');">
+                                    <td title="银泰·红城">银泰·红城</td>
+                                    <td style="text-align: center;">蒸湘区</td>
+                                    <td style="text-align: center;">商服</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/350.html');">
+                                    <td title="银泰·红城">银泰·红城</td>
+                                    <td style="text-align: center;">蒸湘区</td>
+                                    <td style="text-align: center;">车库</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/-78.html');">
+                                    <td title="阳光金城">阳光金城</td>
+                                    <td style="text-align: center;">蒸湘区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">2</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/-115.html');">
+                                    <td title="三和璟园">三和璟园</td>
+                                    <td style="text-align: center;">珠晖区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/232.html');">
+                                    <td title="中建·和城壹品">中建·和城壹品</td>
+                                    <td style="text-align: center;">珠晖区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">2</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/750.html');">
+                                    <td title="国贸中心都市综合体">国贸中心都市综合体</td>
+                                    <td style="text-align: center;">蒸湘区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/1090.html');">
+                                    <td title="天嘉·翰廷">天嘉·翰廷</td>
+                                    <td style="text-align: center;">雁峰区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/-126.html');">
+                                    <td title="水岸豪庭">水岸豪庭</td>
+                                    <td style="text-align: center;">雁峰区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/1350.html');">
+                                    <td title="珠晖酃湖万达广场">珠晖酃湖万达广场</td>
+                                    <td style="text-align: center;">珠晖区</td>
+                                    <td style="text-align: center;">商业服务</td>
+                                    <td style="text-align: center;">2</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/1171.html');">
+                                    <td title="生态天宸">生态天宸</td>
+                                    <td style="text-align: center;">蒸湘区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/-139.html');">
+                                    <td title="衡州教育新城">衡州教育新城</td>
+                                    <td style="text-align: center;">珠晖区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/930.html');">
+                                    <td title="金域豪廷">金域豪廷</td>
+                                    <td style="text-align: center;">蒸湘区</td>
+                                    <td style="text-align: center;">车库</td>
+                                    <td style="text-align: center;">5</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/610.html');">
+                                    <td title="金河湾">金河湾</td>
+                                    <td style="text-align: center;">蒸湘区</td>
+                                    <td style="text-align: center;">商业服务</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/530.html');">
+                                    <td title="金河湾·尚品">金河湾·尚品</td>
+                                    <td style="text-align: center;">雁峰区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/1070.html');">
+                                    <td title="金钟环球中心（金钟府）">金钟环球中心（金钟府）</td>
+                                    <td style="text-align: center;">蒸湘区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">2</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/350.html');">
+                                    <td title="银泰·红城">银泰·红城</td>
+                                    <td style="text-align: center;">蒸湘区</td>
+                                    <td style="text-align: center;">商服</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/350.html');">
+                                    <td title="银泰·红城">银泰·红城</td>
+                                    <td style="text-align: center;">蒸湘区</td>
+                                    <td style="text-align: center;">车库</td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr style="cursor: pointer;" onclick="window.open('/realestate/project/-78.html');">
+                                    <td title="阳光金城">阳光金城</td>
+                                    <td style="text-align: center;">蒸湘区</td>
+                                    <td style="text-align: center;">住宅</td>
+                                    <td style="text-align: center;">2</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!--预售公示-->
+    <div class="layui-main" style="height:380px;">
+        <div class="layui-col-md12">
+            <div class="index_data">
+                <div class="head">
+                    预售证公示<span style="float: right;"><i></i><a
+                        style="color: #999;font-size: 14px;float: right;margin-right: 7px;" href="/realestate/"
+                        target="_blank">更多&gt;</a></span>
+                </div>
+                <div class="list">
+                    <table cellpadding="0" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th style="text-align: center;width:25%;">项目名称</th>
+                            <th style="text-align: center;width:20%">预售证号</th>
+                            <th style="text-align: center;width:25%">企业名称</th>
+                            <th style="width:10%">预售套数</th>
+                            <th style="width:10%">预售面积</th>
+                            <th style="width:10%">发证时间</th>
+                        </tr>
+                        </thead>
+                        <tbody id="presellList-container">
+                        <tr style="cursor: pointer;"
+                            onclick="window.open('/realestate/building/7475.html#tab=presell');">
+                            <td title="华源北街三期1#楼">华源北街三期1#楼</td>
+                            <td style="text-align: center;">衡预许字(2021)第132号</td>
+                            <td title="衡阳市亚材房地产开发有限公司">衡阳市亚材房地产开发有限公司</td>
+                            <td>278</td>
+                            <td>14068.06㎡</td>
+                            <td>2021-07-27</td>
+                        </tr>
+                        <tr style="cursor: pointer;"
+                            onclick="window.open('/realestate/building/6957.html#tab=presell');">
+                            <td title="梧桐庄园68#楼">梧桐庄园68#楼</td>
+                            <td style="text-align: center;">衡预许字(2021)第131号</td>
+                            <td title="湖南中库投资有限公司">湖南中库投资有限公司</td>
+                            <td>144</td>
+                            <td>18162.64㎡</td>
+                            <td>2021-07-26</td>
+                        </tr>
+                        <tr style="cursor: pointer;"
+                            onclick="window.open('/realestate/building/7035.html#tab=presell');">
+                            <td title="融冠乐城二十期A6号楼二、三单元">融冠乐城二十期A6号楼二、三单</td>
+                            <td style="text-align: center;">衡预许字(2021)第130号</td>
+                            <td title="衡阳融禾房地产开发有限公司">衡阳融禾房地产开发有限公司</td>
+                            <td>268</td>
+                            <td>34270.84㎡</td>
+                            <td>2021-07-22</td>
+                        </tr>
+                        <tr style="cursor: pointer;"
+                            onclick="window.open('/realestate/building/7018.html#tab=presell');">
+                            <td title="融冠乐城二十期A6号楼一单元">融冠乐城二十期A6号楼一单元</td>
+                            <td style="text-align: center;">衡预许字(2021)第129号</td>
+                            <td title="衡阳融禾房地产开发有限公司">衡阳融禾房地产开发有限公司</td>
+                            <td>130</td>
+                            <td>17924.86㎡</td>
+                            <td>2021-07-22</td>
+                        </tr>
+                        <tr style="cursor: pointer;"
+                            onclick="window.open('/realestate/building/7595.html#tab=presell');">
+                            <td title="创发城17#栋">创发城17#栋</td>
+                            <td style="text-align: center;">衡预许字(2021)第128号</td>
+                            <td title="衡阳湘浙房地产开发有限公司">衡阳湘浙房地产开发有限公司</td>
+                            <td>654</td>
+                            <td>39198.3㎡</td>
+                            <td>2021-07-22</td>
+                        </tr>
+                        <tr style="cursor: pointer;"
+                            onclick="window.open('/realestate/building/6757.html#tab=presell');">
+                            <td title="中建·和城壹品S4地块33#栋">中建·和城壹品S4地块33#栋</td>
+                            <td style="text-align: center;">衡预许字(2021)第127号</td>
+                            <td title="衡阳领盛房地产有限公司">衡阳领盛房地产有限公司</td>
+                            <td>131</td>
+                            <td>16804.4㎡</td>
+                            <td>2021-07-16</td>
+                        </tr>
+                        <tr style="cursor: pointer;"
+                            onclick="window.open('/realestate/building/6756.html#tab=presell');">
+                            <td title="中建·和城壹品S4地块32#栋">中建·和城壹品S4地块32#栋</td>
+                            <td style="text-align: center;">衡预许字(2021)第126号</td>
+                            <td title="衡阳领盛房地产有限公司">衡阳领盛房地产有限公司</td>
+                            <td>132</td>
+                            <td>16918.44㎡</td>
+                            <td>2021-07-16</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!--  -->
+    <div class="layui-main">
+        <div style="clear:both">
+        </div>
+        <div style="height:10px"></div>
+    </div> <!---->
+    <div class="layui-main">
+        <div class="layui-row layui-col-space15"> <!---->
+            <div class="layui-col-xs4">
+                <div class="index_bbslist">
+                    <div class="head"><i></i><a href="/bbs/p6/1.html" target="_blank">更多&gt;</a>工作动态
+                    </div>
+                    <div class="list index_bbs">
+                        <ul>
+                            <li><span>06-28</span><i></i><a href="bbs_show.html"
+                                                            title="衡阳市住房和城乡建设信息中心党支部开展 “以史为镜、以史明志、知史爱党、知史爱国”主题党日活动"
+                                                            target="_blank">衡阳市住房和城乡建设信息中心党支部开展
+                                “以史为镜、以史明志、知史爱党、知史爱国”主题党日活动</a></li>
+                            <li><span>06-03</span><i></i><a href="bbs_show.html" title="衡阳市住房和城乡建设信息中心党支部开展“送温暖”慰问活动"
+                                                            target="_blank">衡阳市住房和城乡建设信息中心党支部开展“送温暖”慰问活动</a></li>
+                            <li><span>06-01</span><i></i><a href="bbs_show.html" title="衡阳市住房和城乡建设信息中心支部开展“敲门行动”志愿服务活动"
+                                                            target="_blank">衡阳市住房和城乡建设信息中心支部开展“敲门行动”志愿服务活动</a></li>
+                            <li><span>03-10</span><i></i><a href="bbs_show.html" title="今年城市建设怎么干？市住建局给出答案！"
+                                                            target="_blank">今年城市建设怎么干？市住建局给出答案！</a></li>
+                            <li><span>03-10</span><i></i><a href="bbs_show.html" title="住建部发文：严禁盲目抢工期！" target="_blank">住建部发文：严禁盲目抢工期！</a>
+                            </li>
+                            <li><span>03-09</span><i></i><a href="bbs_show.html" title="衡阳市住建系统多措并举 助力打赢“防疫攻坚战”"
+                                                            target="_blank">衡阳市住建系统多措并举 助力打赢“防疫攻坚战”</a></li>
+                            <li><span>03-06</span><i></i><a href="bbs_show.html" title="市住建局：防疫物资送上门 助力建筑工地复工复产"
+                                                            target="_blank">市住建局：防疫物资送上门 助力建筑工地复工复产</a></li>
+                            <li><span>03-06</span><i></i><a href="bbs_show.html" title="雁鸣溪实验学校：200多名工人返岗按下建设“快进键”"
+                                                            target="_blank">雁鸣溪实验学校：200多名工人返岗按下建设“快进键”</a></li>
+                            <li><span>03-04</span><i></i><a href="bbs_show.html" title="关于2020年第3批房地产开发企业行政许可审查结果的公示"
+                                                            target="_blank">关于2020年第3批房地产开发企业行政许可审查结果的公示</a></li>
+                            <li><span>03-03</span><i></i><a href="bbs_show.html" title="总投资521.1亿元 衡阳市112个项目集中开工"
+                                                            target="_blank">总投资521.1亿元 衡阳市112个项目集中开工</a></li>
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                </div>
+            </div> <!----> <!---->
+            <div class="layui-col-xs4">
+                <div class="index_bbslist">
+                    <div class="head"><i></i><a href="/bbs/p7/1.html" target="_blank">更多&gt;</a>政策法规
+                    </div>
+                    <div class="list index_bbs">
+                        <ul>
+                            <li><span>01-25</span><i></i><a href="bbs_show.html"
+                                                            title="衡阳市人民政府办公室关于印发《衡阳市居民住宅二次供水管理办法》的通知" target="_blank">衡阳市人民政府办公室关于印发《衡阳市居民住宅二次供水管理办法》的通知</a>
+                            </li>
+                            <li><span>11-08</span><i></i><a href="bbs_show.html" title="关于进一步推进衡阳市城区棚户区改造工作"
+                                                            target="_blank">关于进一步推进衡阳市城区棚户区改造工作</a></li>
+                            <li><span>09-20</span><i></i><a href="bbs_show.html"
+                                                            title="湖南省住房和城乡建设厅关于印发《湖南省房地产市场经营主体严重失信名单管理暂行办法》的通知"
+                                                            target="_blank">湖南省住房和城乡建设厅关于印发《湖南省房地产市场经营主体严重失信名单管理暂行办法》的通知</a>
+                            </li>
+                            <li><span>06-12</span><i></i><a href="bbs_show.html" title="关于印发湖南省房地产市场监管平台建设工作方案的通知"
+                                                            target="_blank">关于印发湖南省房地产市场监管平台建设工作方案的通知</a></li>
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                </div>
+            </div> <!----> <!---->
+            <div class="layui-col-xs4">
+                <div class="index_bbslist">
+                    <div class="head"><i></i><a href="/bbs/p8/1.html" target="_blank">更多&gt;</a>资料下载
+                    </div>
+                    <div class="list index_bbs">
+                        <ul>
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                </div>
+            </div> <!---->
+        </div>
+    </div>
+    <div class="clear" style="height:10px"></div>  <!--footer-->
+    <div class="footer">
+        <div class="grid zbj-grid ui-footer-bd bordert">
+            <p>Copyright (c) 2007 版权所有 衡阳市住房和城乡建设信息中心 联系电话：0734-8275632 8275629 </p>
+            <p></p>
+            <p><a href="http://beian.miit.gov.cn/" target="_blank">湘ICP备07007704号-1</a> All rights reserved,
+                www.hyfc365.com E-mail:webmaster@hyfc365.com</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
